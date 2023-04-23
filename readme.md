@@ -1,8 +1,8 @@
 # Trabalho: Analisador Léxico
 
 Nome dos alunos e números de matrícula:
-* Aluno: ___________________________
-* Aluno: ___________________________
+* Aluno: Rafael Silva Tavares
+* Aluno: Lindomar Rodrigues
 * Disciplina: Compiladores
 * Semestre: 2023/1
 * Data de entrega: 26/04/2023
