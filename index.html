@@ -49,8 +49,13 @@
                                 <button class="botao" style="height: 30; width: 150px;" onclick={gerarEvento()}>Start Debugging</button>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" style="width: 100%;">
-                            <p style="color: white; padding: 3%;">Área do terminal</p>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" style="width: 100%; height: 80%; margin-left: 20px;">
+                            <p style="color: white; margin-top: 20px; margin-left: 20px; font-size: 20px;">Área do terminal</p>
+                            <div id="terminal" style="height:500px; width:80%; border:1px solid #181720; font:16px/26px Georgia, Garamond, Serif; overflow:auto; margin-bottom: 20px;">
+                                <ul id="terminal-ul" style="color: white; list-style: none;">
+                                    
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

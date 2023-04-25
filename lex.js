@@ -96,7 +96,21 @@ function gerarToken(input){
 function gerarEvento(){
     const entrada3 = document.getElementById("input").value
     const tokens = gerarToken(entrada3);
-    console.log(tokens);
-    console.log(entrada3);
+    // console.log(tokens);
+    // console.log(entrada3);
+
+    const lista = document.getElementById("terminal-ul");
+
+    if(lista.length > 0){
+        while(lista.length){
+            lista.pop()
+        }
+    }
+
+    tokens.map((item)=>{
+        const tok = document.createElement('li')
+        tok.innerHTML = `< ${item.tipo}, ${item.valor}>`
+        lista.appendChild(tok)
+    })
 }
 
