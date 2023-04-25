@@ -42,7 +42,7 @@
 }
 
 .asideIcons{
-    width: 5%;
+    width: 70px;
     height: 95%;
     display: flex;
     flex-direction: column;
@@ -62,7 +62,7 @@
 }
 
 .asideItens{
-    width: 12%;
+    width: 200px;
     height: 100%;
     background-color: #181720;
     color: white;
@@ -72,11 +72,13 @@
 .asideItens h4{
     margin-top: 10px;
     margin-left: 10px;
+    font-size: 20px;
 }
 
 .asideItens p{
     margin-top: 20px;
     margin-left: 30px;
+    width: 200px;
 }
 
 .title{
@@ -84,6 +86,7 @@
     font-weight: bold;
     margin-left: 5%;
     margin-bottom: 2%;
+    color: white;
 }
 
 .analisador{
@@ -98,14 +101,16 @@
 .area{
     background-color: transparent;
     height: 80%;
-    width: 600px;
+    width: 900px;
+    padding: 3%;
+    color: white;
 }
 
 .botao{
     height: 40px;
     width: 100px;
     background-color: #181720;
-    margin-top: 30px;
+    margin-top: 20px;
     color: white;
     font-weight: bold;
 }
