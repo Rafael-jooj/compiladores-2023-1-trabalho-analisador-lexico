@@ -4,7 +4,7 @@ class Token{
         this.valor = valor;
     }
 }
-
+var erro = '';
 const reservedWords = ['int', 'char', 'long', 'short', 'float', 'double', 'void', 'if', 'else', 'for', 'while', 'do', 'break', 'continue', 'struct', 'switch', 'case', 'default'];
 // const operators= ['=', '+', '-', '*', '/', '++', '--', '!', '&', '%', '->', '==', '!=', '||', '&&', '+=', '-=', '*=', '/=', '<', '>', '<=', '>='];
 // const delimitadores = ['(', ')', '{', '}', '[', ']', ',', ';'];
@@ -12,6 +12,7 @@ const reservedWords = ['int', 'char', 'long', 'short', 'float', 'double', 'void'
 function gerarToken(input){
     const tokens = [];  //Lista de todos os tokens ao final da execução
     var currentInput = 0; //contador
+    erro = '';
 
     //Percorrendo caracter por caracter
     while(currentInput < input.length){
@@ -44,6 +45,8 @@ function gerarToken(input){
             if(/[a-zA-Z]/.test(input[currentInput +1])){
                 valueErro = currentChar + input[currentInput +1];
                 console.log(`Erro léxico --> ${valueErro}`)
+                erro += `Erro léxico --> ${valueErro}`
+                break;
             }
             while(/[\d\.]/.test(currentChar)){
                 valueNumber += currentChar;
@@ -110,6 +113,7 @@ function gerarToken(input){
         //Erro por caractéres inválidos
         else{
             console.log(`Entrada inválida, Erro léxico --> ${currentChar}`)
+            erro += `Entrada inválida, Erro léxico --> ${currentChar}`;
             break;
         }
 
@@ -124,16 +128,20 @@ function gerarEvento(){
     const tokens = gerarToken(entrada3);
 
     const lista = document.getElementById("terminal-ul");
+    const erroLex = document.getElementById("erroLex");
 
     while (lista.hasChildNodes()) {
         lista.removeChild(lista.firstChild);
     }
+
 
     tokens.map((item)=>{
         const tok = document.createElement('li')
         tok.innerHTML = `< ${item.tipo}, ${item.valor} >`
         lista.appendChild(tok)
     });
+
+    erroLex.innerHTML = `${erro}`;
 
 }
 
