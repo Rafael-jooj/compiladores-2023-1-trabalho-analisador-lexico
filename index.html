@@ -49,9 +49,11 @@
                                 <button class="botao" style="height: 30; width: 150px;" onclick={gerarEvento()}>Start Debugging</button>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" style="width: 100%; height: 80%; margin-left: 20px;">
-                            <p style="color: white; margin-top: 20px; margin-left: 20px; font-size: 20px;">Área do terminal</p>
-                            <div id="terminal" style="height:500px; width:80%; border:1px solid #181720; font:16px/26px Georgia, Garamond, Serif; overflow:auto; margin-bottom: 20px;">
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" style="width: 100%; height: 80%; padding: 3%;">
+                            <p style="color: white; margin-top: 20px; font-size: 30px; font-weight: bold;">Terminal</p>
+                            <div id="terminal" style="height:450px; width:600px; border:1px solid #fff; font:16px/26px Georgia, Garamond, Serif; overflow:auto; margin-bottom: 20px; ">
+                                <h4 style="color: white; display: flex; justify-content: center;">##### Tabela de Tokens #####</h4>
+                                <p style="color: white; margin-left: 20px;">Token , Descrição</p>
                                 <ul id="terminal-ul" style="color: white; list-style: none;">
                                     
                                 </ul>

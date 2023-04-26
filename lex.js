@@ -1,7 +1,7 @@
 class Token{
     constructor(tipo, valor){
         this.tipo = tipo;
-        this.valor = valor
+        this.valor = valor;
     }
 }
 
@@ -17,9 +17,34 @@ function gerarToken(input){
     while(currentInput < input.length){
         let currentChar = input[currentInput]
 
+        //desconsiderando comentários de linha
+        if(currentChar === '/' && input[currentInput+1] === '/'){
+            const endLine = input.indexOf("\n", currentInput);
+            if(endLine === -1) break;
+            currentInput = endLine;
+        }
+
+        //Desconsiderando comentários em bloco
+        else if(currentChar === '/' && input[currentInput+1] === '*'){
+            currentInput++;
+            const endComent = input.indexOf("*/", currentInput + 2);
+            currentInput = endComent +2;
+            continue
+        }
+
+        //Desconsiderando espaços
+        else if(/\s/.test(currentChar)){
+            currentInput++
+            continue;
+        }
+
         //reconhecer números inteiros e floats
-        if(/\d/.test(currentChar)){
+        else if(/\d/.test(currentChar)){
             let valueNumber = '';
+            if(/[a-zA-Z]/.test(input[currentInput +1])){
+                valueErro = currentChar + input[currentInput +1];
+                console.log(`Erro léxico --> ${valueErro}`)
+            }
             while(/[\d\.]/.test(currentChar)){
                 valueNumber += currentChar;
                 currentChar = input[++currentInput]
@@ -34,9 +59,9 @@ function gerarToken(input){
         }
 
         //reconhecer identificadores e palavras reservadas
-        if (/[a-zA-Z0-9]/.test(currentChar)){
+        else if (/[a-zA-Z0-9_]/.test(currentChar)){
             let valueId = '';
-            while(/[a-zA-Z0-9]/.test(currentChar)){
+            while(/[a-zA-Z0-9_]/.test(currentChar)){
                 valueId += currentChar;
                 currentChar = input[++currentInput]
             }
@@ -49,28 +74,28 @@ function gerarToken(input){
         }
 
         //reconhecer operadores
-        if (/[\=\+\-\*\/\!\&\%\>\<\|]/.test(currentChar)){
+        else if (/[\=\+\-\*\/\!\&\%\>\<\|]/.test(currentChar)){
             let valueOp = '';
             valueOp += currentChar
             currentInput++
             currentChar = input[currentInput]
             if(/[\=\+\-\*\/\!\&\%\>\<\|]/.test(currentChar)){
                 valueOp += currentChar;
+                currentInput++;
             }
             tokens.push(new Token('operador', valueOp))
-            currentInput ++;
             continue;
         }
 
         //reconhecer delimitadores
-        if(/[\(\)\[\]\{\}\,\;]/.test(currentChar)){
+        else if(/[\(\)\[\]\{\}\,\;\:]/.test(currentChar)){
             tokens.push(new Token('delimitador', currentChar))
             currentInput++;
             continue
         }
 
         //reconhecer constante textual
-        if(/['"]/.test(currentChar)){
+        else if(/['"]/.test(currentChar)){
             let valueContante = '';
             const aspas = currentChar;
             currentInput++;
@@ -80,7 +105,12 @@ function gerarToken(input){
                 currentChar = input[++currentInput];
             }
             tokens.push(new Token('constante literal', valueContante));
-            currentInput++;
+        }
+
+        //Erro por caractéres inválidos
+        else{
+            console.log(`Entrada inválida, Erro léxico --> ${currentChar}`)
+            break;
         }
 
         currentInput ++;
@@ -89,28 +119,21 @@ function gerarToken(input){
     return tokens;
 }
 
-
-// const entrada = 'let x = 123 + 456;\nif (x > 500) {\n  console.log("x é maior que 500");\n} else {\n  console.log("x é menor ou igual a 500");\n}';
-// const entrada2 = 'int main() {int ata, b, c, d; if(z || c) {return 3.14;}}'
-
 function gerarEvento(){
     const entrada3 = document.getElementById("input").value
     const tokens = gerarToken(entrada3);
-    // console.log(tokens);
-    // console.log(entrada3);
 
     const lista = document.getElementById("terminal-ul");
 
-    if(lista.length > 0){
-        while(lista.length){
-            lista.pop()
-        }
+    while (lista.hasChildNodes()) {
+        lista.removeChild(lista.firstChild);
     }
 
     tokens.map((item)=>{
         const tok = document.createElement('li')
-        tok.innerHTML = `< ${item.tipo}, ${item.valor}>`
+        tok.innerHTML = `< ${item.tipo}, ${item.valor} >`
         lista.appendChild(tok)
-    })
+    });
+
 }
 
